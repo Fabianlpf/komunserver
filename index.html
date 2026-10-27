@@ -1,152 +1,154 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komunserver | Soporte Informático y Tecnología Avanzada</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Tu archivo CSS separado -->
-    <link rel="stylesheet" href="css/style.css">
+    <title>Komunserver | Soporte Informático Avanzado</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[#07090e] text-slate-100 font-sans selection:bg-cyan-500 selection:text-black">
+<body>
 
-    <!-- Fondo Canvas Animado -->
-    <canvas id="matrix-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-20"></canvas>
+    <!-- Fondo de malla tecnológica -->
+    <div class="tech-grid"></div>
+    <div class="glow-orb"></div>
 
-    <!-- HEADER / NAVEGACIÓN -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#07090e]/80 backdrop-blur-md border-b border-cyan-500/20">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold shadow-[0_0_15px_rgba(0,255,204,0.3)]">
-                    KS
-                </div>
-                <span class="text-xl font-black tracking-wider text-white">KOMUN<span class="text-cyan-400">SERVER</span></span>
-            </div>
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
-                <a href="#inicio" class="hover:text-cyan-400 transition-colors">Inicio</a>
-                <a href="#servicios" class="hover:text-cyan-400 transition-colors">Servicios</a>
-                <a href="#consola" class="hover:text-cyan-400 transition-colors">Consola IA</a>
-                <a href="#contacto" class="px-4 py-2 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition-all shadow-[0_0_20px_rgba(0,255,204,0.4)]">Soporte Remoto</a>
-            </nav>
+    <nav>
+        <div class="logo">KOMUN<span class="highlight">SERVER</span></div>
+        <a href="#contacto" class="btn-nav">Ingresar al Sistema</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content fade-in">
+            <h1><span class="typewriter">Tecnología Corporativa</span></h1>
+            <p>Infraestructura, mantenimiento y seguridad. Potenciamos tu empresa con soluciones de alto rendimiento. Experiencia desde 2010.</p>
+            <a href="#servicios" class="btn-primary">Inicializar Servicios</a>
         </div>
     </header>
 
-    <!-- SECCIÓN HERO -->
-    <section id="inicio" class="relative z-10 pt-36 pb-20 md:pt-48 md:pb-32 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-6">
-                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                    <span>Sistemas Operativos & Soporte 24/7</span>
-                </div>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight mb-6">
-                    Infraestructura Tecnológica <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Sin Fallas.</span>
-                </h1>
-                <p class="text-slate-400 text-lg mb-8 leading-relaxed">
-                    Elevamos el rendimiento y la seguridad informática de tu empresa con soporte técnico avanzado, diagnóstico en tiempo real y arquitectura de servidores de alta disponibilidad.
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#servicios" class="px-8 py-4 rounded-xl bg-cyan-500 text-black font-bold text-center hover:bg-cyan-400 transition-all shadow-[0_0_25px_rgba(0,255,204,0.4)]">
-                        Explorar Servicios
-                    </a>
-                    <a href="#consola" class="px-8 py-4 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-bold text-center hover:border-cyan-500 hover:text-cyan-400 transition-all">
-                        Probar Consola CLI
-                    </a>
-                </div>
-            </div>
-            <div class="relative">
-                <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 opacity-30 blur-xl"></div>
-                <div class="relative bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
-                        <div class="flex space-x-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                        </div>
-                        <span class="text-xs font-mono text-slate-500">komunserver-core-v2.6</span>
-                    </div>
-                    <div class="space-y-3 font-mono text-sm">
-                        <div class="text-cyan-400">$ systemctl status server-guard</div>
-                        <div class="text-slate-400">● ServerGuard Protection Active (Port 443)</div>
-                        <div class="text-cyan-400">$ ping -c 1 telemetry.komunserver.local</div>
-                        <div class="text-emerald-400">64 bytes from 10.0.0.1: icmp_seq=1 ttl=118 time=0.342 ms</div>
-                        <div class="text-slate-300 animate-pulse">_ Monitoreo de nodos óptimo...</div>
-                    </div>
-                </div>
+    <!-- Marcas Tecnológicas -->
+    <section class="brands">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>// HP</span><span>// DELL</span><span>// LENOVO</span><span>// ASUS</span><span>// ACER</span>
+                <span>// HP</span><span>// DELL</span><span>// LENOVO</span><span>// ASUS</span><span>// ACER</span>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN SERVICIOS -->
-    <section id="servicios" class="relative z-10 py-24 px-6 bg-slate-950/50 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Soluciones de Soporte Integral</h2>
-                <p class="text-slate-400">Tecnología de punta diseñada para mantener tus operaciones corriendo sin interrupciones.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 transition-all group">
-                    <div class="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="shield-check" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Seguridad & Redes</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Auditorías de seguridad, mitigación de malware, configuración de firewalls perimetrales y enrutamiento avanzado.</p>
+    <section id="servicios" class="services">
+        <h2 class="section-title fade-up">Catálogo de <span class="highlight">Servicios</span></h2>
+        <div class="services-grid">
+            
+            <!-- Tarjeta 1 -->
+            <div class="tech-card fade-up tilt-effect">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80" alt="Mantenimiento de PC">
                 </div>
-                <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 transition-all group">
-                    <div class="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="cpu" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Hardware & Mantenimiento</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Diagnóstico de componentes críticos, optimización de estaciones de trabajo, servidores físicos y soporte de campo especializado.</p>
-                </div>
-                <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 transition-all group">
-                    <div class="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="terminal" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Soporte Remoto 24/7</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Asistencia técnica inmediata vía túneles seguros y mesa de ayuda automatizada para resolución rápida de incidentes.</p>
+                <div class="card-content">
+                    <h3>Mantenimiento</h3>
+                    <p>Preventivo y correctivo de hardware y software para máximo rendimiento continuo.</p>
                 </div>
             </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="card-wrapper fade-up delay-1">
+                <div class="tech-card tilt-effect">
+                    <div class="card-image">
+                        <!-- Nueva imagen de equipos -->
+                        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=600&auto=format&fit=crop" alt="Equipos de cómputo">
+                    </div>
+                    <div class="card-content">
+                        <h3>Equipos de Cómputo</h3>
+                        <p>Venta de estaciones de trabajo y portátiles de última generación para tu flujo laboral.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <div class="tech-card fade-up tilt-effect delay-2">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80" alt="Cámaras de seguridad">
+                </div>
+                <div class="card-content">
+                    <h3>Cámaras de Seguridad</h3>
+                    <p>Implementación de circuitos cerrados (CCTV) e IP para vigilancia perimetral 24/7.</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta 4 -->
+            <div class="card-wrapper fade-up">
+                <div class="tech-card tilt-effect">
+                    <div class="card-image">
+                        <!-- Imagen representativa de discos duros y recuperación -->
+                        <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?q=80&w=600&auto=format&fit=crop" alt="Recuperación de datos y discos duros">
+                    </div>
+                    <div class="card-content">
+                        <h3>Recuperación de Datos</h3>
+                        <p>Rescate forense de información crítica en discos duros, SSD y servidores afectados.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 5 -->
+            <div class="tech-card fade-up tilt-effect delay-1">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Redes y Servidores">
+                </div>
+                <div class="card-content">
+                    <h3>Infraestructura de Red</h3>
+                    <p>Cableado estructurado, configuración de servidores y redes empresariales seguras.</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta 6 -->
+            <div class="tech-card fade-up tilt-effect delay-2">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Soporte Profesional">
+                </div>
+                <div class="card-content">
+                    <h3>Soporte Profesional</h3>
+                    <p>Asistencia técnica corporativa remota y presencial para resolver eventualidades.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- SECCIÓN CONSOLA INTERACTIVA CLI -->
-    <section id="consola" class="relative z-10 py-24 px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold mb-2">Consola de Diagnóstico Komunserver</h2>
-                <p class="text-slate-400 text-sm">Prueba los comandos del sistema escribiendo <code class="text-cyan-400 font-mono">ayuda</code>, <code class="text-cyan-400 font-mono">estado</code> o <code class="text-cyan-400 font-mono">contacto</code>.</p>
-            </div>
-            <div class="bg-black/80 border border-cyan-500/30 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,255,204,0.15)]">
-                <div class="bg-slate-900 px-4 py-3 border-b border-cyan-500/20 flex items-center justify-between">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                        <span class="ml-3 text-xs font-mono text-slate-400">root@komunserver:~#</span>
-                    </div>
-                    <span class="text-xs font-mono text-cyan-400">CLI v1.0.4</span>
+    <section id="contacto" class="contact fade-up">
+        <div class="contact-panel">
+            <h2>Establecer Conexión</h2>
+            <p>Genera un ticket de soporte o cotiza tus equipos. Respuesta inmediata.</p>
+            
+            <form action="https://formspree.io/f/TU_CODIGO_FORMSPREE" method="POST" class="tech-form">
+                <div class="input-group">
+                    <input type="text" name="nombre" required>
+                    <label>Nombre / Empresa</label>
                 </div>
-                <div id="terminal-output" class="p-6 h-64 overflow-y-auto font-mono text-sm space-y-2 text-slate-300">
-                    <div>Bienvenido al núcleo de Komunserver CLI. Escribe <span class="text-cyan-400">ayuda</span> para ver los comandos disponibles.</div>
+                <div class="input-group">
+                    <input type="email" name="email" required>
+                    <label>Correo Electrónico</label>
                 </div>
-                <div class="p-4 bg-slate-950 border-t border-slate-800 flex items-center">
-                    <span class="text-cyan-400 font-mono mr-2">&gt;</span>
-                    <input type="text" id="terminal-input" class="w-full bg-transparent font-mono text-sm text-slate-100 focus:outline-none" placeholder="Escribe un comando aquí...">
+                <div class="input-group">
+                    <textarea name="mensaje" rows="4" required></textarea>
+                    <label>Requerimiento técnico...</label>
                 </div>
-            </div>
+                <button type="submit" class="btn-primary form-btn">Transmitir Datos</button>
+            </form>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="relative z-10 py-12 px-6 border-t border-slate-900 bg-slate-950 text-center text-slate-500 text-sm">
-        <p>&copy; 2026 Komunserver. Todos los derechos reservados. Arquitectura de soporte avanzado.</p>
+    <footer>
+        <p>STATUS: ONLINE | &copy; 2026 Komunserver System. Datos encriptados.</p>
     </footer>
 
-    <!-- Tu archivo JS separado -->
-    <script src="js/main.js"></script>
+    <!-- Botón de WhatsApp Intacto -->
+    <a href="https://wa.me/573103043323?text=Hola,%20necesito%20soporte%20informático%20para%20mi%20empresa." class="whatsapp-btn" target="_blank">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
 </body>
 </html>
