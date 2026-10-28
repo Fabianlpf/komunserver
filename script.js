@@ -54,3 +54,95 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// 4. Lógica de Consulta de Órdenes
+    const btnConsultar = document.getElementById('btn-consultar');
+    const inputOrden = document.getElementById('numero-orden');
+    const resultadoDiv = document.getElementById('resultado-orden');
+    const errorDiv = document.getElementById('error-mensaje');
+    
+    // REEMPLAZA POR TU URL DE GOOGLE APPS SCRIPT
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbySuFyVQV2s_LDYQAknsepPxOc_PYcfRGaxfir740NtIZ3bg7DL4AIh9An6Z1lbf2lE/exec';
+
+    // --- NUEVO: ESCUCHAR LA TECLA ENTER ---
+    if (inputOrden) {
+        inputOrden.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita que la página intente recargarse
+                btnConsultar.click();   // Simula un clic en el botón
+            }
+        });
+    }
+    // --------------------------------------
+
+    if (btnConsultar) {
+        btnConsultar.addEventListener('click', async () => {
+            const numeroOrden = inputOrden.value.trim();
+            
+            // Ocultar paneles al iniciar
+            resultadoDiv.style.display = 'none';
+            if(errorDiv) errorDiv.style.display = 'none';
+
+            if (!numeroOrden) {
+                if(errorDiv) {
+                    errorDiv.innerText = "Por favor ingresa un número de orden válido.";
+                    errorDiv.style.display = 'block';
+                }
+                return;
+            }
+
+            // Efecto de carga
+            const textoOriginal = btnConsultar.innerText;
+            btnConsultar.innerText = "Consultando base de datos...";
+            btnConsultar.disabled = true;
+
+            try {
+                // Llamada a Google Sheets
+                const response = await fetch(`${SCRIPT_URL}?orden=${encodeURIComponent(numeroOrden)}`);
+                const data = await response.json();
+
+                if (data.encontrado) {
+                    
+                    // 1. Determinar el color correcto para el estado
+                    const estadoMin = String(data.estado).toLowerCase().trim();
+                    let claseColor = 'estado-azul'; // Color por defecto
+                    
+                    if (estadoMin === 'por revisar') {
+                        claseColor = 'estado-amarillo';
+                    } else if (estadoMin === 'por entregar') {
+                        claseColor = 'estado-verde';
+                    }
+
+                    // 2. INYECTAR EL HTML DIRECTAMENTE (Esto evita que salga vacío)
+                    resultadoDiv.innerHTML = `
+                        <div class="resultado-header">
+                            <h3>Orden: <span class="highlight">${data.orden}</span></h3>
+                        </div>
+                        <div class="resultado-body">
+                            <p><strong>Cliente:</strong> <span>${data.cliente}</span></p>
+                            <p><strong>Estado:</strong> <span class="estado-badge ${claseColor}">${data.estado}</span></p>
+                            <p><strong>Diagnóstico:</strong> <span>${data.diagnostico}</span></p>
+                        </div>
+                    `;
+                    
+                    // 3. Mostrar el recuadro ya lleno
+                    resultadoDiv.style.display = 'block';
+                    
+                } else {
+                    if(errorDiv) {
+                        errorDiv.innerText = "No se encontró la orden: " + numeroOrden + ". Verifica e intenta de nuevo.";
+                        errorDiv.style.display = 'block';
+                    }
+                }
+            } catch (error) {
+                if(errorDiv) {
+                    errorDiv.innerText = "Error de conexión. Intente más tarde.";
+                    errorDiv.style.display = 'block';
+                }
+                console.error(error);
+            } finally {
+                btnConsultar.innerText = textoOriginal;
+                btnConsultar.disabled = false;
+            }
+        });
+    }

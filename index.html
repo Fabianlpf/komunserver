@@ -15,7 +15,10 @@
 
     <nav>
         <div class="logo">KOMUN<span class="highlight">SERVER</span></div>
-        <a href="#contacto" class="btn-nav">Ingresar al Sistema</a>
+        <div class="nav-links">
+            <a href="#ordenes" class="btn-nav">Consultar Orden</a>
+            <a href="#contacto" class="btn-nav">Ingresar al Sistema</a>
+        </div>
     </nav>
 
     <header class="hero">
@@ -115,12 +118,45 @@
         </div>
     </section>
 
+    <section id="ordenes" class="ordenes fade-up">
+        <div class="ordenes-panel">
+            <h2>Consultar <span class="highlight">Orden</span></h2>
+            <p>Ingresa el número de orden (Ej: OK-001) para validar el estado de tu equipo.</p>
+                       
+            <div class="tech-form orden-form">
+                <div class="input-group">
+                    <input type="text" id="numero-orden" required>
+                    <label>Número de Orden</label>
+                </div>
+                <button type="button" id="btn-consultar" class="btn-primary form-btn">Ejecutar Consulta</button>
+            </div>
+
+            <!-- NUEVO: Contenedor para los errores -->
+            <div id="error-mensaje" class="error-mensaje" style="display: none;"></div>
+
+            <!-- Panel de Resultados (Oculto hasta que se consulte) -->
+            <div id="resultado-orden" class="resultado-orden" style="display: none;">
+
+            <!-- Panel de Resultados (Oculto hasta que se consulte) -->
+            <div id="resultado-orden" class="resultado-orden" style="display: none;">
+                <div class="resultado-header">
+                    <h3>Orden: <span id="res-orden-num" class="highlight"></span></h3>
+                </div>
+                <div class="resultado-body">
+                    <p><strong>Cliente:</strong> <span id="res-cliente"></span></p>
+                    <p><strong>Estado:</strong> <span id="res-estado" class="estado-badge"></span></p>
+                    <p><strong>Diagnóstico:</strong> <span id="res-diagnostico"></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contacto" class="contact fade-up">
         <div class="contact-panel">
             <h2>Establecer Conexión</h2>
             <p>Genera un ticket de soporte o cotiza tus equipos. Respuesta inmediata.</p>
             
-            <form action="https://formspree.io/f/TU_CODIGO_FORMSPREE" method="POST" class="tech-form">
+            <form action="https://formspree.io/f/xoeedyre" method="POST" class="tech-form">
                 <div class="input-group">
                     <input type="text" name="nombre" required>
                     <label>Nombre / Empresa</label>
