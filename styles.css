@@ -683,6 +683,37 @@ footer {
 
 /* --- ADAPTACIÓN A DISPOSITIVOS MÓVILES --- */
 @media screen and (max-width: 900px) {
+    /* Barra superior compacta */
+    nav {
+        padding: 0.5rem 2%;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .logo {
+        font-size: 1.2rem !important;
+    }
+
+    /* Contenedor estático y centrado sin necesidad de arrastrar */
+    .nav-links {
+        display: flex;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important; /* Centra perfectamente los botones */
+        align-items: center;
+        gap: 4px;                          /* Espacio reducido entre botones para que quepan */
+        width: 100%;
+        overflow: visible !important;      /* Evita cualquier scroll innecesario */
+    }
+
+    .btn-nav {
+        padding: 0.3rem 0.4rem !important;  /* Margen interno más delgado */
+        font-size: 0.6rem !important;       /* Letra ajustada para pantallas pequeñas */
+        letter-spacing: 0px !important;
+        white-space: nowrap !important;
+        flex: 1;                            /* Distribuye el espacio equitativamente entre los 4 botones */
+        text-align: center;
+    }
     .modulos-wrapper {
         flex-direction: column; /* Se apilan verticalmente */
         gap: 4rem; /* Espacio vertical entre ellos */
@@ -877,3 +908,4 @@ section {
 section {
     scroll-margin-top: 100px; /* Deja un espacio de 100px arriba cuando el enlace salte a cualquier sección */
 }
+
