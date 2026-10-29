@@ -223,3 +223,81 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 });
+
+// =======================================================
+    // 6. LÓGICA DE LA CALCULADORA DE MANTENIMIENTO
+    // =======================================================
+    const btnCalcular = document.getElementById('btn-calcular');
+    const resultadoCotizacion = document.getElementById('resultado-cotizacion');
+    const totalTexto = document.getElementById('total-cotizacion');
+    const btnWaCotizacion = document.getElementById('btn-whatsapp-cotizacion');
+
+    if (btnCalcular) {
+        btnCalcular.addEventListener('click', () => {
+            // 1. Obtener cantidades de servicios base
+            const cantSoftware = parseInt(document.getElementById('cant-software').value) || 0;
+            const cantFormateo = parseInt(document.getElementById('cant-formateo').value) || 0;
+            const cantPreventivo = parseInt(document.getElementById('cant-preventivo').value) || 0;
+            
+            // 2. Obtener checkboxes de servicios especiales
+            const reqServidores = document.getElementById('req-servidores').checked;
+            const reqCamaras = document.getElementById('req-camaras').checked;
+            const reqRedes = document.getElementById('req-redes').checked;
+
+            // 3. Precios base
+            const precioSoftware = 60000;
+            const precioFormateo = 90000;
+            const precioPreventivo = 60000;
+
+            // 4. Calcular total base
+            let total = (cantSoftware * precioSoftware) + (cantFormateo * precioFormateo) + (cantPreventivo * precioPreventivo);
+
+            const totalFormateado = new Intl.NumberFormat('es-CO', { 
+                style: 'currency', 
+                currency: 'COP', 
+                maximumFractionDigits: 0 
+            }).format(total);
+
+            // 5. Ajustar lo que se muestra en pantalla
+            const requiereCotizacionExtra = reqServidores || reqCamaras || reqRedes;
+
+            if (requiereCotizacionExtra && total === 0) {
+                // Si solo marcaron cámaras/redes sin computadores
+                totalTexto.innerText = "Por Cotizar";
+                totalTexto.style.fontSize = "2.2rem";
+            } else if (requiereCotizacionExtra && total > 0) {
+                // Si tienen computadores + servicios especiales
+                totalTexto.innerText = `${totalFormateado} + Visita`;
+                totalTexto.style.fontSize = "2rem";
+            } else {
+                // Si solo son servicios base
+                totalTexto.innerText = `${totalFormateado}*`;
+                totalTexto.style.fontSize = "2.8rem";
+            }
+            
+            resultadoCotizacion.style.display = 'block';
+
+            // 6. Armar el mensaje de WhatsApp detallado
+            let mensajeWa = `Hola Komunserver, solicito atención para los siguientes servicios:%0A`;
+            
+            if (cantSoftware > 0) mensajeWa += `- ${cantSoftware}x Mantenimiento de Software Básico%0A`;
+            if (cantFormateo > 0) mensajeWa += `- ${cantFormateo}x Formateo y Configuración%0A`;
+            if (cantPreventivo > 0) mensajeWa += `- ${cantPreventivo}x Mantenimiento Preventivo Físico%0A`;
+            
+            if (requiereCotizacionExtra) {
+                mensajeWa += `%0A*Requiero cotización/visita para:*%0A`;
+                if (reqServidores) mensajeWa += `- Servidores%0A`;
+                if (reqCamaras) mensajeWa += `- Cámaras de seguridad (CCTV)%0A`;
+                if (reqRedes) mensajeWa += `- Redes empresariales%0A`;
+            }
+            
+            if (total > 0) {
+                mensajeWa += `%0A*Presupuesto base estimado:* ${totalFormateado}%0A`;
+            }
+
+            mensajeWa += `%0A¿Podemos agendar una visita técnica?`;
+
+            // 7. Enviar al botón (Asegúrate de que tu número esté correcto)
+            btnWaCotizacion.href = `https://wa.me/573103043323?text=${mensajeWa}`;
+        });
+    }

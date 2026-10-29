@@ -639,3 +639,241 @@ footer {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
+/* --- CALCULADORA DE MANTENIMIENTO --- */
+.checkbox-group {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+/* --- CONTENEDOR DE MÓDULOS (LADO A LADO EN PC) --- */
+.modulos-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem; /* Espacio entre los dos paneles */
+    padding: 5rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start; /* Evita que uno se estire si el otro es más largo */
+}
+
+/* Quitamos los márgenes individuales para que el wrapper los controle */
+.modulos-wrapper .ordenes, 
+.modulos-wrapper .contact {
+    padding: 0; 
+    flex: 1; /* Ambos ocupan exactamente la mitad (50%) */
+    width: 100%;
+}
+
+/* --- ADAPTACIÓN A DISPOSITIVOS MÓVILES --- */
+@media screen and (max-width: 900px) {
+    .modulos-wrapper {
+        flex-direction: column; /* Se apilan verticalmente */
+        gap: 4rem; /* Espacio vertical entre ellos */
+        padding: 3rem 5%;
+    }
+}
+/* --- REDUCCIÓN DE ESPACIOS ENTRE SECCIONES --- */
+
+/* 1. Reduce el espacio vertical general de todas las secciones de la página */
+section {
+    padding: 3rem 5% !important; /* Antes probablemente tenías 5rem o más */
+}
+
+/* 2. Ajusta el contenedor de Órdenes y Cotizador en PC */
+.modulos-wrapper {
+    padding: 2rem 5%; /* Reducimos el espacio superior e inferior */
+    gap: 2rem; /* Reducimos la separación entre el cuadro izquierdo y derecho */
+}
+
+/* 3. Ajustes específicos para celulares */
+@media screen and (max-width: 900px) {
+    .modulos-wrapper {
+        gap: 2rem; /* Reducimos el espacio entre los cuadros cuando se apilan hacia abajo */
+        padding: 1.5rem 5%; /* Menos espacio en las orillas para móviles */
+    }
+}
+/* --- CORRECCIÓN DEFINITIVA DE PANELES Y COTIZADOR --- */
+
+/* 1. Paneles equilibrados expandidos a los lados */
+.modulos-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch !important;
+    max-width: 1450px; /* ¡AQUÍ ESTÁ LA SOLUCIÓN! Expandimos el límite de 1100 a 1450 */
+    width: 100%;
+    gap: 4rem; /* Separamos un poco más los cuadros en el centro para balancear */
+    margin: 0 auto;
+    padding: 2rem 2%; /* Reducimos el margen invisible de las orillas */
+}
+
+.modulos-wrapper .ordenes-panel, 
+.modulos-wrapper .contact-panel {
+    max-width: 100% !important;
+    width: 100%;
+    height: auto !important; /* Evita que queden alargados artificialmente */
+    padding: 3rem 2.5rem !important;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; /* Alinea el contenido arriba de forma natural */
+}
+
+/* 2. Reparación de los textos amontonados */
+.cotizador-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100%;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Desactivamos el efecto de "texto flotante" para este bloque */
+.cotizador-row .input-group {
+    display: flex;
+    flex-direction: column-reverse; /* Truco: pone la etiqueta arriba del input */
+    flex: 1;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.cotizador-row .input-group label {
+    position: relative !important; 
+    transform: none !important; /* Anula la animación que los encimaba */
+    top: 0 !important;
+    left: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 8px;
+    font-size: 0.85rem !important;
+    pointer-events: auto;
+    color: var(--text-main);
+}
+
+.cotizador-row .input-group input {
+    border: 1px solid rgba(14, 165, 233, 0.4) !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 8px;
+    padding: 12px !important;
+    width: 100%;
+}
+
+/* 3. Checkboxes horizontales */
+.cotizador-row.checkboxes {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+.cotizador-row.checkboxes .checkbox-group {
+    margin: 0;
+}
+
+/* Adaptación para celulares */
+@media screen and (max-width: 900px) {
+    .modulos-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .cotizador-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .cotizador-row.checkboxes {
+        flex-direction: row;
+    }
+}
+
+/* --- AJUSTES DE ESPACIADO EXCLUSIVOS PARA MÓVIL --- */
+@media screen and (max-width: 900px) {
+    /* 1. Reduce el espacio general de todas las secciones en celular */
+    section {
+        padding: 1rem 5% !important; 
+    }
+    
+    /* 2. Comprime el contenedor de los módulos (Órdenes y Cotizador) */
+    .modulos-wrapper {
+        flex-direction: column;
+        gap: 1.5rem !important; /* Menos espacio entre cuadro y cuadro */
+        padding: 1rem 5% 0.5rem 5% !important; /* Reduce drásticamente el espacio inferior */
+        margin-bottom: 0 !important;
+    }
+
+    /* 3. Reduce el relleno interno de los paneles oscuros para que no queden tan altos */
+    .modulos-wrapper .ordenes-panel, 
+    .modulos-wrapper .contact-panel {
+        padding: 2rem 1.5rem !important;
+    }
+}
+/* --- ESTILO PARA LOS LOGOS EN MOVIMIENTO --- */
+.marquee-content {
+    display: flex;
+    align-items: center;
+}
+
+.marquee-content img {
+    height: 40px; /* Controla la altura uniforme de todos los logos */
+    width: auto;
+    margin: 0 3.5rem; /* Espacio horizontal entre cada logo */
+    filter: brightness(0) invert(1); /* Vuelve los logos blancos para que combinen con tu diseño oscuro */
+    opacity: 0.6; /* Semitransparentes por defecto */
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el cursor por encima de un logo */
+.marquee-content img:hover {
+    opacity: 1;
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px var(--accent-glow)); /* Brillo neón al tocar */
+    transform: scale(1.1);
+}
+/* --- REDUCIR ESPACIO ENTRE EL HERO Y LAS MARCAS --- */
+
+/* 1. Reduce la altura forzada de la pantalla principal en PC */
+.hero {
+    height: auto !important; /* Deja que el contenido dicte el tamaño */
+    min-height: 85vh;        /* Reduce el alto mínimo para que no sea toda la pantalla */
+    padding-top: 6rem;       /* Espacio superior para que no choque con el menú */
+    padding-bottom: 3rem;    /* Reduce el espacio inferior que marcaste */
+}
+
+/* 2. Reduce el relleno de la franja de marcas */
+.brands {
+    padding: 1rem 0 !important; /* Antes tenía 2rem, ahora es más compacta */
+}
+
+/* 3. Ajustes específicos para móviles */
+@media screen and (max-width: 768px) {
+    .hero {
+        min-height: auto !important;
+        padding: 5rem 5% 2rem 5% !important; /* Menos espacio abajo en celulares */
+    }
+}
+
+/* --- AUMENTAR TAMAÑO DEL TEXTO DEL HERO --- */
+.hero-content p {
+    font-size: 1.6rem !important; /* Antes estaba en 1.3rem, súbelo a 1.5rem o 1.6rem según prefieras */
+    max-width: 800px;            /* Ampliamos un poco el ancho máximo para que respire mejor */
+    margin: 1.5rem auto 2.5rem;
+}
+
+/* --- CORRECCIÓN DE DESPLAZAMIENTO (OFFSET PARA MENÚ FIJO) --- */
+section {
+    scroll-margin-top: 100px; /* Deja un espacio de 100px arriba cuando el enlace salte a cualquier sección */
+}

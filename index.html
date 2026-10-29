@@ -14,11 +14,13 @@
     <div class="glow-orb"></div>
 
     <nav>
-        <div class="logo">KOMUN<span class="highlight">SERVER</span></div>
-       <div class="nav-links">
+       <a href="#" class="logo" style="text-decoration: none;">KOMUN<span class="highlight">SERVER</span></a>
+        <div class="nav-links">
             <a href="#tienda" class="btn-nav">Equipos en Venta</a>
             <a href="#ordenes" class="btn-nav">Consultar Orden</a>
+            <a href="#cotizador" class="btn-nav">Cotizador</a>
             <a href="#contacto" class="btn-nav">Ingresar</a>
+            
         </div>
     </nav>
 
@@ -34,8 +36,19 @@
     <section class="brands">
         <div class="marquee">
             <div class="marquee-content">
-                <span>// HP</span><span>// DELL</span><span>// LENOVO</span><span>// ASUS</span><span>// ACER</span>
-                <span>// HP</span><span>// DELL</span><span>// LENOVO</span><span>// ASUS</span><span>// ACER</span>
+                <!-- Primer bloque de logos -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg" alt="HP">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Dell_logo_2016.svg" alt="Dell">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg" alt="Lenovo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Asus_blue_logo.svg" alt="Asus">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Acer_2011.svg" alt="Acer">
+                
+                <!-- Segundo bloque idéntico para que el efecto de movimiento sea infinito y sin cortes -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg" alt="HP">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Dell_logo_2016.svg" alt="Dell">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg" alt="Lenovo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Asus_blue_logo.svg" alt="Asus">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Acer_2011.svg" alt="Acer">
             </div>
         </div>
     </section>
@@ -131,7 +144,11 @@
         </div>
     </section>
 
-    <section id="ordenes" class="ordenes fade-up">
+    <!-- NUEVO CONTENEDOR: Agrupa los módulos para ponerlos lado a lado en PC -->
+    <div class="modulos-wrapper">
+        
+        <!-- SECCIÓN DE ÓRDENES (La que ya tienes) -->
+        <section id="ordenes" class="ordenes fade-up">
         <div class="ordenes-panel">
             <h2>Consultar <span class="highlight">Orden</span></h2>
             <p>Ingresa el número de orden (Ej: OK-001) para validar el estado de tu equipo.</p>
@@ -164,10 +181,69 @@
         </div>
     </section>
 
+        <!-- SECCIÓN CALCULADORA DE MANTENIMIENTO -->
+    <section id="cotizador" class="contact fade-up">
+        <div class="contact-panel">
+            <h2>Calculadora de <span class="highlight">Mantenimiento</span></h2>
+            <p>Estima el presupuesto de mantenimiento preventivo para tu empresa.</p>
+            
+            <form id="form-cotizador" class="tech-form">
+                <!-- Fila 1: Servicios con precio base en horizontal -->
+                <div class="cotizador-row">
+                    <div class="input-group">
+                        <input type="number" id="cant-software" min="0" value="0" required style="text-align: center;">
+                        <label>Software Básico<br><span style="font-size: 0.75rem; color: var(--text-muted);">(desde $60k)</span></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="cant-formateo" min="0" value="0" required style="text-align: center;">
+                        <label>Formateo<br><span style="font-size: 0.75rem; color: var(--text-muted);">($90k)</span></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="cant-preventivo" min="0" value="0" required style="text-align: center;">
+                        <label>Preventivo<br><span style="font-size: 0.75rem; color: var(--text-muted);">(desde $60k)</span></label>
+                    </div>
+                </div>
+                
+                <!-- Fila 2: Servicios bajo cotización interna -->
+                <p style="color: var(--text-main); margin-top: 15px; margin-bottom: 15px; font-weight: bold; font-size: 0.95rem; text-align: center;">
+                    Infraestructura (Cotización interna):
+                </p>
+                <div class="cotizador-row checkboxes">
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="req-servidores"> Servidores</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="req-camaras"> Cámaras (CCTV)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="req-redes"> Redes</label>
+                    </div>
+                </div>
+
+                <button type="button" id="btn-calcular" class="btn-primary form-btn" style="margin-top: 25px;">Calcular Presupuesto</button>
+            </form>
+
+            <!-- Panel de Resultados (Oculto por defecto) -->
+            <div id="resultado-cotizacion" class="resultado-orden" style="display: none; text-align: center; margin-top: 2rem;">
+                <h3 style="margin-bottom: 10px; color: var(--text-main);">Inversión Estimada</h3>
+                <h2 class="highlight" id="total-cotizacion" style="font-size: 2.8rem; margin-bottom: 15px;">$ 0</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px;">
+                    *Este valor es un estimado para mantenimiento preventivo de hardware/software. Sujeto a diagnóstico final.
+                </p>
+                <a href="#" id="btn-whatsapp-cotizacion" target="_blank" class="btn-primary" style="display: inline-block; background: #25D366; color: #fff; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);">
+                    Solicitar Visita Técnica
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </div> <!-- CIERRE DEL NUEVO CONTENEDOR -->
+
+   <!-- SECCIÓN CONTACTO -->
     <section id="contacto" class="contact fade-up">
         <div class="contact-panel">
             <h2>Establecer Conexión</h2>
-            <p>Genera un ticket de soporte o cotiza tus equipos. Respuesta inmediata.</p>
+            <p>Genera un ticket de soporte. Respuesta inmediata.</p>
             
             <form action="https://formspree.io/f/xoeedyre" method="POST" class="tech-form">
                 <div class="input-group">
