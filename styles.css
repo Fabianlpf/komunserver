@@ -176,7 +176,7 @@ nav {
 
 /* Distribución Centrada de Servicios */
 .services { 
-    padding: 8rem 5%; 
+    padding: 2rem 5%; 
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -245,7 +245,7 @@ nav {
 .contact { padding: 5rem 5%; display: flex; justify-content: center; }
 .contact-panel {
     background: var(--surface-dark);
-    padding: 4rem;
+    padding: 1rem;
     border-radius: 12px;
     border: 1px solid rgba(14,165,233,0.3);
     width: 100%;
@@ -254,7 +254,7 @@ nav {
     box-shadow: 0 0 40px rgba(0,0,0,0.5);
 }
 
-.contact-panel h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+.contact-panel h2 { font-size: 2rem; margin-bottom: 1rem; }
 .contact-panel p { color: var(--text-muted); margin-bottom: 3rem; }
 .tech-form { display: flex; flex-direction: column; gap: 2rem; }
 .input-group { position: relative; }
