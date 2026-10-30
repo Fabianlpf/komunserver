@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Komunserver</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { padding: 50px 5%; background: var(--bg-base); }
+        .admin-container { max-width: 800px; margin: 0 auto; background: var(--surface-dark); padding: 40px; border-radius: 12px; border: 1px solid var(--accent); }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h2 style="text-align:center; margin-bottom: 20px;">Panel Admin: <span class="highlight">Ingresar Equipo</span></h2>
+        
+        <form id="form-admin-orden" class="tech-form">
+            <div class="cotizador-row" style="gap: 15px;">
+                <div class="input-group" style="flex: 1;"><input type="text" id="adm-cliente" required><label>Cliente *</label></div>
+                <div class="input-group" style="flex: 1;"><input type="text" id="adm-telefono" required><label>Teléfono *</label></div>
+            </div>
+            <div class="cotizador-row" style="gap: 15px; margin-top: 15px;">
+                <div class="input-group" style="flex: 1;"><input type="text" id="adm-direccion"><label>Dirección</label></div>
+                <div class="input-group" style="flex: 1;"><input type="text" id="adm-tipo" required><label>Tipo de Equipo *</label></div>
+            </div>
+            <div class="cotizador-row" style="gap: 15px; margin-top: 15px;">
+                <div class="input-group" style="flex: 1;"><input type="text" id="adm-marca"><label>Marca y Modelo</label></div>
+                <div class="input-group" style="flex: 1;"><input type="text" id="adm-falla"><label>Falla Reportada</label></div>
+            </div>
+            <div class="cotizador-row" style="gap: 15px; margin-top: 15px;">
+                <div class="input-group" style="flex: 1;"><input type="date" id="adm-f-ingreso"><label style="top: -0.8rem; left: 0.8rem; font-size: 0.9rem;">Fecha Ingreso</label></div>
+                <div class="input-group" style="flex: 1;"><input type="date" id="adm-f-revision"><label style="top: -0.8rem; left: 0.8rem; font-size: 0.9rem;">Fecha Revisión</label></div>
+            </div>
+            <div class="cotizador-row" style="gap: 15px; margin-top: 15px;">
+                <div class="input-group" style="flex: 1;"><input type="date" id="adm-f-entrega"><label style="top: -0.8rem; left: 0.8rem; font-size: 0.9rem;">Fecha Entrega</label></div>
+                <div class="input-group" style="flex: 1;">
+                    <select id="adm-estado" style="width: 100%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; color: #fff;">
+                        <option value="POR REVISAR">POR REVISAR</option>
+                        <option value="EN PROCESO">EN PROCESO</option>
+                        <option value="PARA ENTREGAR">PARA ENTREGAR</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group" style="margin-top: 15px;">
+                <textarea id="adm-diagnostico" rows="3"></textarea><label>Diagnóstico inicial...</label>
+            </div>
+            <button type="button" id="btn-guardar-orden" class="btn-primary form-btn" style="margin-top: 20px;">Registrar Orden en BD</button>
+        </form>
+        <div id="admin-mensaje" class="error-mensaje" style="display: none; margin-top:20px;"></div>
+    </div>
+
+    <script>
+        // PEGA AQUÍ LA NUEVA URL QUE TE DIO GOOGLE APPS SCRIPT
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwH7nYKWdX7sXFdxA-K4A74g2-t1xXsdm350NB7iASjM8_1oWgonM3m75ZBWicAZ_d/exec';
+
+        document.getElementById('btn-guardar-orden').addEventListener('click', async () => {
+            const btn = document.getElementById('btn-guardar-orden');
+            const msj = document.getElementById('admin-mensaje');
+            
+            const formData = {
+                cliente: document.getElementById('adm-cliente').value.trim(),
+                telefono: document.getElementById('adm-telefono').value.trim(),
+                direccion: document.getElementById('adm-direccion').value.trim(),
+                tipoEquipo: document.getElementById('adm-tipo').value.trim(),
+                marca: document.getElementById('adm-marca').value.trim(),
+                falla: document.getElementById('adm-falla').value.trim(),
+                fechaIngreso: document.getElementById('adm-f-ingreso').value,
+                fechaRevision: document.getElementById('adm-f-revision').value,
+                fechaEntrega: document.getElementById('adm-f-entrega').value,
+                estado: document.getElementById('adm-estado').value,
+                diagnostico: document.getElementById('adm-diagnostico').value.trim()
+            };
+
+            if (!formData.cliente || !formData.telefono || !formData.tipoEquipo) {
+                msj.style.background = "rgba(239, 68, 68, 0.15)"; msj.style.color = "#f87171";
+                msj.innerText = "Llena los campos obligatorios (*)."; msj.style.display = 'block'; return;
+            }
+
+            btn.innerText = "Guardando..."; btn.disabled = true;
+
+            try {
+                // EL TRUCO: text/plain evita el bloqueo CORS
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    msj.style.background = "rgba(34, 197, 94, 0.15)"; msj.style.color = "#4ade80";
+                    msj.innerText = `¡Éxito! Orden generada: ${result.orden}`; msj.style.display = 'block';
+                    document.getElementById('form-admin-orden').reset();
+                } else { throw new Error(result.error); }
+            } catch (error) {
+                msj.style.background = "rgba(239, 68, 68, 0.15)"; msj.style.color = "#f87171";
+                msj.innerText = "Error de conexión: " + error.message; msj.style.display = 'block';
+            } finally {
+                btn.innerText = "Registrar Orden en BD"; btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
