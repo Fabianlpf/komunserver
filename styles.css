@@ -237,7 +237,10 @@ nav {
     filter: grayscale(0%);
 }
 
-.card-content { padding: 2rem; }
+.card-content { 
+    padding: 2rem; 
+    text-align: center; /* Esto centra todo el texto en PC y Móvil */
+}
 .card-content h3 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--accent-glow); letter-spacing: 1px;}
 .card-content p { color: var(--text-muted); font-size: 1.1rem; }
 
@@ -764,5 +767,70 @@ section {
     }
     .logo {
         font-size: 1.1rem !important;
+    }
+}
+/* Botón Secreto SuperAdmin (Easter Egg) */
+#btn-secreto {
+    cursor: pointer;
+    color: transparent; /* Invisible por defecto */
+    user-select: none;
+    transition: all 0.3s ease; /* Transición suave de encendido */
+}
+
+#btn-secreto:hover {
+    color: var(--accent-glow); /* Cambia al color azul de tu marca */
+    text-shadow: 0 0 12px var(--accent-glow); /* Efecto de resplandor tipo neón */
+}
+/* Botón de volver arriba */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* Al lado opuesto de WhatsApp */
+    background-color: rgba(15, 23, 42, 0.8);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex; /* Oculto por defecto, JS lo muestra */
+    justify-content: center;
+    align-items: center;
+    z-index: 998;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.scroll-top-btn:hover {
+    background-color: var(--accent);
+    color: #000;
+    box-shadow: 0 0 15px var(--accent-glow);
+    transform: translateY(-5px);
+}
+
+/* Enlaces de micro-interacción en tarjetas */
+.service-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--accent-glow);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.service-link:hover {
+    color: #fff;
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+@media screen and (max-width: 900px) {
+    .scroll-top-btn {
+        width: 45px; height: 45px;
+        bottom: 20px; left: 20px;
+        font-size: 1.2rem;
     }
 }

@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // 1. Crear las imágenes del carrusel
                         let slidesHTML = '';
                         prod.imagenes.forEach(img => {
-                            slidesHTML += `<div class="carousel-slide"><img src="${img}" alt="${prod.producto}" style="cursor: pointer;" onclick="abrirModal('${img}')"></div>`;
+                            slidesHTML += `<div class="carousel-slide"><img src="${img}" loading="lazy" alt="${prod.producto}" style="cursor: pointer;" onclick="abrirModal('${img}')"></div>`;
                         });
 
                         // 2. Crear botones de navegación solo si hay más de 1 imagen
@@ -302,4 +302,85 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-   
+   // =======================================================
+    // 7. LÓGICA DEL BOTÓN SECRETO (SUPERADMIN)
+    // =======================================================
+    const btnSecreto = document.getElementById('btn-secreto');
+    const modalSecreto = document.getElementById('modal-secreto');
+    const btnCerrarSecreto = document.getElementById('btn-cerrar-secreto');
+    const btnVerificar = document.getElementById('btn-verificar-codigo');
+    const inputCodigo = document.getElementById('input-codigo-secreto');
+    const mensajeSecreto = document.getElementById('mensaje-secreto');
+
+    // La URL de tu script de administrador
+    const urlAdmin = 'https://script.google.com/macros/s/AKfycbwGrvk1uMTcbL6NRC4xcUzPjW3wBrqpL4i8LHtV-fhMh1jHlaQPpFZroAeQga0jkBEL/exec';
+
+    if (btnSecreto) {
+        // Al hacer clic en el punto invisible del footer
+        btnSecreto.addEventListener('click', () => {
+            modalSecreto.style.display = 'flex';
+            inputCodigo.value = ''; // Limpiar el campo
+            mensajeSecreto.style.display = 'none';
+            inputCodigo.focus();
+        });
+    }
+
+    if (btnCerrarSecreto) {
+        btnCerrarSecreto.addEventListener('click', () => {
+            modalSecreto.style.display = 'none';
+        });
+    }
+
+    if (btnVerificar) {
+        // Función para validar el código
+        const validarCodigo = () => {
+            if (inputCodigo.value === '1825') {
+                mensajeSecreto.style.color = '#4ade80';
+                mensajeSecreto.innerText = 'Acceso Concedido. Redirigiendo...';
+                mensajeSecreto.style.display = 'block';
+                
+                // Redirigir a la URL del admin
+                setTimeout(() => {
+                    window.location.href = urlAdmin;
+                }, 800);
+            } else {
+                mensajeSecreto.style.color = '#ef4444';
+                mensajeSecreto.innerText = 'Código Inválido';
+                mensajeSecreto.style.display = 'block';
+                inputCodigo.value = ''; // Limpia el input tras fallar
+            }
+        };
+
+        // Escuchar clic en el botón verificar
+        btnVerificar.addEventListener('click', validarCodigo);
+
+        // Escuchar tecla Enter en el input
+        inputCodigo.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                validarCodigo();
+            }
+        });
+    }
+
+    // =======================================================
+    // 8. BOTÓN DE VOLVER ARRIBA (SCROLL TO TOP)
+    // =======================================================
+    const btnScrollTop = document.getElementById('btn-scroll-top');
+    
+    if (btnScrollTop) {
+        window.addEventListener('scroll', () => {
+            // Mostrar el botón si bajamos más de 300px
+            if (window.scrollY > 300) {
+                btnScrollTop.style.display = 'flex';
+            } else {
+                btnScrollTop.style.display = 'none';
+            }
+        });
+
+        // La acción que lo hace subir al hacer clic
+        btnScrollTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+

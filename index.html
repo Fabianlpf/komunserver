@@ -65,6 +65,7 @@
                 <div class="card-content">
                     <h3>Mantenimiento</h3>
                     <p>Preventivo y correctivo de hardware y software para máximo rendimiento continuo.</p>
+                    <a href="https://wa.me/573103043323?text=Hola%20Komunserver,%20quiero%20cotizar%20un%20Mantenimiento" target="_blank" class="service-link">▸ Cotizar ahora</a>
                 </div>
             </div>
 
@@ -78,6 +79,7 @@
                     <div class="card-content">
                         <h3>Equipos de Cómputo</h3>
                         <p>Venta de estaciones de trabajo y portátiles de última generación para tu flujo laboral.</p>
+                        <a href="https://wa.me/573103043323?text=Hola%20Komunserver,%20quiero%20cotizar%20un%20Equipo" target="_blank" class="service-link">▸ Cotizar ahora</a>
                     </div>
                 </div>
             </div>
@@ -85,11 +87,12 @@
             <!-- Tarjeta 3 -->
             <div class="tech-card fade-up tilt-effect delay-2">
                 <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80" alt="Cámaras de seguridad">
+                    <img src="https://plus.unsplash.com/premium_photo-1748936421976-aae1e88fdfc3?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" alt="Cámaras de seguridad">
                 </div>
                 <div class="card-content">
                     <h3>Cámaras de Seguridad</h3>
                     <p>Implementación de circuitos cerrados (CCTV) e IP para vigilancia perimetral 24/7.</p>
+                    <a href="https://wa.me/573103043323?text=Hola%20Komunserver,%20quiero%20cotizar%20un%20Servicio%20de%20Cámaras" target="_blank" class="service-link">▸ Cotizar ahora</a>
                 </div>
             </div>
 
@@ -103,6 +106,7 @@
                     <div class="card-content">
                         <h3>Recuperación de Datos</h3>
                         <p>Rescate forense de información crítica en discos duros, SSD y servidores afectados.</p>
+                        <a href="https://wa.me/573103043323?text=Hola%20Komunserver,%20quiero%20cotizar%20un%20Recuperación%20de%20Datos" target="_blank" class="service-link">▸ Cotizar ahora</a>
                     </div>
                 </div>
             </div>
@@ -115,6 +119,7 @@
                 <div class="card-content">
                     <h3>Infraestructura de Red</h3>
                     <p>Cableado estructurado, configuración de servidores y redes empresariales seguras.</p>
+                    <a href="https://wa.me/573103043323?text=Hola%20Komunserver,%20quiero%20cotizar%20un%20Infraestructura%20de%20Red" target="_blank" class="service-link">▸ Cotizar ahora</a>
                 </div>
             </div>
 
@@ -126,6 +131,7 @@
                 <div class="card-content">
                     <h3>Soporte Profesional</h3>
                     <p>Asistencia técnica corporativa remota y presencial para resolver eventualidades.</p>
+                    <a href="https://wa.me/573103043323?text=Hola%20Komunserver,%20quiero%20cotizar%20un%20Soporte%20Profesional" target="_blank" class="service-link">▸ Cotizar ahora</a>
                 </div>
             </div>
 
@@ -258,6 +264,14 @@
                     <textarea name="mensaje" rows="4" required></textarea>
                     <label>Requerimiento técnico...</label>
                 </div>
+                
+                <!-- CHECKBOX HABEAS DATA -->
+                <div class="checkbox-group" style="justify-content: center; margin: 15px 0;">
+                    <label style="font-size: 0.85rem; color: var(--text-muted); cursor: pointer;">
+                        <input type="checkbox" required style="width: auto; margin-right: 8px; accent-color: var(--accent);"> 
+                        Acepto la política de tratamiento de datos personales (Ley 1581 de 2012).
+                    </label>
+                </div>                
                 <button type="submit" class="btn-primary form-btn">Transmitir Datos</button>
             </form>
         </div>
@@ -265,11 +279,33 @@
 
     
 
+   <!-- FOOTER CON BOTÓN OCULTO -->
     <footer>
-        <p>STATUS: ONLINE | &copy; 2026 Komunserver System. Datos encriptados.</p>
+        <p>STATUS: ONLINE | &copy; 2026 Komunserver System. Datos encriptados. 
+           <!-- El botón es un simple punto invisible al lado del texto -->
+           <br><span id="btn-secreto">SuperAdmin</span>
+        </p>
     </footer>
 
+    <!-- MODAL PARA EL CÓDIGO SECRETO -->
+    <div id="modal-secreto" class="modal-overlay" style="display: none; z-index: 10001;">
+        <div class="contact-panel" style="background: rgba(2, 6, 23, 0.95); padding: 30px; border: 1px solid var(--accent); border-radius: 8px; max-width: 400px; width: 90%;">
+            <h3 style="color: var(--accent-glow); margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Acceso SuperAdmin</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Ingrese el protocolo de autorización:</p>
+            
+            <div class="tech-form">
+                <div class="input-group">
+                    <input type="password" id="input-codigo-secreto" placeholder="****" style="text-align: center; letter-spacing: 5px;">
+                </div>
+                <button type="button" id="btn-verificar-codigo" class="btn-primary" style="margin-top: 15px; padding: 0.8rem;">Verificar</button>
+                <button type="button" id="btn-cerrar-secreto" style="margin-top: 10px; background: none; border: none; color: var(--text-muted); cursor: pointer; font-family: 'Rajdhani', sans-serif; text-decoration: underline;">Cancelar</button>
+            </div>
+            <div id="mensaje-secreto" style="color: #ef4444; margin-top: 15px; font-size: 0.9rem; display: none;">Acceso Denegado</div>
+        </div>
+    </div> <!-- ESTA ES LA ETIQUETA QUE FALTABA CERRAR -->
 
+    <!-- Botón de subir (Scroll to top) -->
+    <button id="btn-scroll-top" class="scroll-top-btn" title="Volver arriba">&#8679;</button>
 
     <!-- Botón de WhatsApp Intacto -->
     <a href="https://wa.me/573103043323?text=Hola,%20necesito%20soporte%20informático%20para%20mi%20empresa." class="whatsapp-btn" target="_blank">
