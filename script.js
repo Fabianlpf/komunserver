@@ -338,12 +338,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 mensajeSecreto.style.color = '#4ade80';
                 mensajeSecreto.innerText = 'Acceso Concedido. Redirigiendo...';
                 mensajeSecreto.style.display = 'block';
-                
-                // Redirigir a la URL del admin
-                setTimeout(() => {
-                    window.location.href = urlAdmin;
-                }, 800);
-            } else {
+                        
+        // AGREGA EL PARÁMETRO AL FINAL DE LA URL
+        setTimeout(() => {
+            window.location.href = urlAdmin + "?codigo=1825"; 
+        }, 800);
+    } else {
                 mensajeSecreto.style.color = '#ef4444';
                 mensajeSecreto.innerText = 'Código Inválido';
                 mensajeSecreto.style.display = 'block';
@@ -384,3 +384,59 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+
+// =======================================================
+    // ENVÍO DE FORMULARIO CON MODAL PERSONALIZADO
+    // =======================================================
+    const formContacto = document.querySelector('form[action="https://formspree.io/f/xoeedyre"]');
+    const modalNotificacion = document.getElementById('modal-notificacion');
+    const textoNotificacion = document.getElementById('texto-notificacion');
+    const btnCerrarNotificacion = document.getElementById('btn-cerrar-notificacion');
+
+    // Cerrar el modal al hacer clic en "Aceptar"
+    if (btnCerrarNotificacion) {
+        btnCerrarNotificacion.addEventListener('click', () => {
+            modalNotificacion.style.display = 'none';
+        });
+    }
+
+    if (formContacto) {
+        formContacto.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Evita que la página recargue
+            
+            const btnSubmit = formContacto.querySelector('button[type="submit"]');
+            const textoOriginal = btnSubmit.innerText;
+            btnSubmit.innerText = "Transmitiendo...";
+            btnSubmit.disabled = true; 
+            
+            try {
+                // Enviamos los datos a Formspree silenciosamente
+                await fetch(formContacto.action, {
+                    method: 'POST',
+                    body: new FormData(formContacto),
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                // ÉXITO: Mostramos el modal estilizado en verde
+                if (textoNotificacion && modalNotificacion) {
+                    textoNotificacion.innerText = "Solicitud recibida exitosamente. Iniciando protocolo de respuesta.";
+                    textoNotificacion.style.color = '#4ade80'; // Verde brillante
+                    modalNotificacion.style.display = 'flex';
+                }
+                
+                formContacto.reset(); // Limpia los campos del formulario
+                
+            } catch (error) {
+                // ERROR: Mostramos el modal estilizado en rojo
+                if (textoNotificacion && modalNotificacion) {
+                    textoNotificacion.innerText = "Fallo en la transmisión de datos. Por favor, intente de nuevo.";
+                    textoNotificacion.style.color = '#ef4444'; // Rojo brillante
+                    modalNotificacion.style.display = 'flex';
+                }
+            } finally {
+                // Restauramos el botón a su estado original
+                btnSubmit.innerText = textoOriginal;
+                btnSubmit.disabled = false;
+            }
+        });
+    }

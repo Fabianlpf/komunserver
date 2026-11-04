@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komunserver | Soporte Informático Avanzado</title>
+    <meta name="description" content="Komunserver: Especialistas en soporte informático corporativo, mantenimiento de computadores, redes, recuperación de datos e instalación de cámaras de seguridad.">
+    <meta name="keywords" content="soporte informático, mantenimiento de computadores, cámaras de seguridad CCTV, infraestructura de red, recuperación de datos, Komunserver">
+    <meta name="author" content="Komunserver">
+    <meta property="og:title" content="Komunserver | Soporte Informático Avanzado">
+    <meta property="og:description" content="Potenciamos tu empresa con soluciones tecnológicas de alto rendimiento.">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -19,7 +24,7 @@
             <a href="#tienda" class="btn-nav">Equipos en Venta</a>
             <a href="#ordenes" class="btn-nav">Consultar Orden</a>
             <a href="#cotizador" class="btn-nav">Cotizador</a>
-            <a href="#contacto" class="btn-nav">Ingresar</a>
+            <a href="#contacto" class="btn-nav">Contacto</a>
             
         </div>
     </nav>
@@ -169,10 +174,7 @@
 
             <!-- NUEVO: Contenedor para los errores -->
             <div id="error-mensaje" class="error-mensaje" style="display: none;"></div>
-
-            <!-- Panel de Resultados (Oculto hasta que se consulte) -->
-            <div id="resultado-orden" class="resultado-orden" style="display: none;">
-
+            
             <!-- Panel de Resultados (Oculto hasta que se consulte) -->
             <div id="resultado-orden" class="resultado-orden" style="display: none;">
                 <div class="resultado-header">
@@ -302,7 +304,7 @@
             </div>
             <div id="mensaje-secreto" style="color: #ef4444; margin-top: 15px; font-size: 0.9rem; display: none;">Acceso Denegado</div>
         </div>
-    </div> <!-- ESTA ES LA ETIQUETA QUE FALTABA CERRAR -->
+    </div>
 
     <!-- Botón de subir (Scroll to top) -->
     <button id="btn-scroll-top" class="scroll-top-btn" title="Volver arriba">&#8679;</button>
@@ -320,10 +322,19 @@
         <img id="modal-img" class="modal-content" src="">
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <!-- MODAL PARA NOTIFICACIONES DE FORMULARIO -->
+    <div id="modal-notificacion" class="modal-overlay" style="display: none; z-index: 10001;">
+        <div class="contact-panel" style="background: rgba(2, 6, 23, 0.95); padding: 30px; border: 1px solid var(--accent); border-radius: 8px; max-width: 400px; width: 90%; text-align: center;">
+            <h3 style="color: var(--accent-glow); margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">SISTEMA INTERNO KOMUNSERVER</h3>
+            <p id="texto-notificacion" style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 25px;">
+                <!-- El texto se inyecta desde JavaScript -->
+            </p>
+            <button type="button" id="btn-cerrar-notificacion" class="btn-primary" style="padding: 0.8rem 2rem;">Aceptar</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
+  
