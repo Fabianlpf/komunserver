@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // =======================================================
     // LA MISMA URL SIRVE PARA ÓRDENES Y CATÁLOGO
     // =======================================================
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwH7nYKWdX7sXFdxA-K4A74g2-t1xXsdm350NB7iASjM8_1oWgonM3m75ZBWicAZ_d/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZsLJkLUUOUhRrf6I4q0MmuO5K5UQqS3SDJ_nG5TaceNdO_h-x3GWxjKYwdAIyHBxo/exec';
 
     // =======================================================
     // 4. LÓGICA DE ÓRDENES
