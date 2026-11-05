@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mensajeSecreto = document.getElementById('mensaje-secreto');
 
     // La URL de tu script de administrador
-    const urlAdmin = 'https://script.google.com/macros/s/AKfycbwGrvk1uMTcbL6NRC4xcUzPjW3wBrqpL4i8LHtV-fhMh1jHlaQPpFZroAeQga0jkBEL/exec';
+    const urlAdmin = 'https://script.google.com/macros/s/AKfycbxR9pBizhaJjgPehQKoILFk-5BsbOGyei6jB4XD9uHFX-mFL_x4hXNmL88vAowZ8kBm/exec';
 
     if (btnSecreto) {
         // Al hacer clic en el punto invisible del footer
