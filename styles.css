@@ -59,10 +59,22 @@ nav {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espacio entre el ícono y el texto (si usas Opción B) */
     font-size: 1.8rem;
     font-weight: 900;
     letter-spacing: 3px;
+    text-decoration: none;
+    color: var(--text-main);
     text-shadow: 0 0 10px rgba(14,165,233,0.5);
+}
+
+.logo-img {
+    height: 80px; /* Ajusta esta altura según la proporción de tu logo */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.4)); /* Brillo sutil acorde al tema */
 }
 
 .highlight { color: var(--accent-glow); }
@@ -258,8 +270,12 @@ nav {
 }
 
 .contact-panel h2 { font-size: 2rem; margin-bottom: 1rem; }
-.contact-panel p { color: var(--text-muted); margin-bottom: 3rem; }
-.tech-form { display: flex; flex-direction: column; gap: 2rem; }
+.contact-panel p { 
+    color: var(--text-muted); 
+    margin-bottom: 3rem; 
+    font-size: 18px; /* <-- Ajusta este valor a tu gusto para PC */
+}
+.tech-form { display: flex; flex-direction: column; gap: 1rem; }
 .input-group { position: relative; }
 
 .input-group input, .input-group textarea {
@@ -360,7 +376,11 @@ section {
 }
 
 .ordenes-panel h2 { font-size: 2.2rem; margin-bottom: 1rem; }
-.ordenes-panel p { color: var(--text-muted); margin-bottom: 3rem; }
+.ordenes-panel p { 
+    color: var(--text-muted); 
+    margin-bottom: 3rem; 
+    font-size: 18px; /* <-- Aquí cambias el tamaño para PC */
+}
 
 .resultado-orden {
     margin-top: 2rem;
@@ -612,7 +632,7 @@ section {
     left: 0 !important;
     padding: 0 !important;
     margin-bottom: 8px;
-    font-size: 0.85rem !important;
+    font-size: 16px !important;
     pointer-events: auto;
     color: var(--text-main);
 }
@@ -648,6 +668,9 @@ section {
 
     .logo {
         font-size: 1.2rem !important;
+    }
+    .logo-img {
+        height: 32px !important;
     }
 
     /* Menú móvil estático, en una sola fila y perfectamente centrado */

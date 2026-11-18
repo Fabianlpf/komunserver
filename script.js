@@ -123,6 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (estadoMin === 'por revisar') claseColor = 'estado-amarillo';
                     else if (estadoMin === 'para entregar') claseColor = 'estado-verde';
 
+                    // Solo mostramos el valor si la orden tiene un precio asignado
+                    const textoValor = data.valor ? `<p><strong>Valor Reparación:</strong> <span style="color: #4ade80; font-weight: bold; font-size: 1.1rem;">$ ${data.valor}</span></p>` : '';
+
                     resultadoDiv.innerHTML = `
                         <div class="resultado-header">
                             <h3>Orden: <span class="highlight">${data.orden}</span></h3>
@@ -131,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <p><strong>Cliente:</strong> <span>${data.cliente}</span></p>
                             <p><strong>Estado:</strong> <span class="estado-badge ${claseColor}">${data.estado}</span></p>
                             <p><strong>Diagnóstico:</strong> <span>${data.diagnostico}</span></p>
+                            ${textoValor}
                         </div>
                     `;
                     resultadoDiv.style.display = 'block';
@@ -332,23 +336,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (btnVerificar) {
-        // Función para validar el código
-        const validarCodigo = () => {
-            if (inputCodigo.value === '1825') {
-                mensajeSecreto.style.color = '#4ade80';
-                mensajeSecreto.innerText = 'Acceso Concedido. Redirigiendo...';
-                mensajeSecreto.style.display = 'block';
+        // Función blindada: No expone la contraseña en el frontend
+        const validarCodigo = () => {                          
+            const codigoIngresado = inputCodigo.value.trim();
+            if (codigoIngresado === '') return;
+
+            mensajeSecreto.style.color = '#4ade80';
+            mensajeSecreto.innerText = 'Iniciando protocolo de conexión...';
+            mensajeSecreto.style.display = 'block';
                         
-        // AGREGA EL PARÁMETRO AL FINAL DE LA URL
-        setTimeout(() => {
-            window.location.href = urlAdmin + "?codigo=1825"; 
-        }, 800);
-    } else {
-                mensajeSecreto.style.color = '#ef4444';
-                mensajeSecreto.innerText = 'Código Inválido';
-                mensajeSecreto.style.display = 'block';
-                inputCodigo.value = ''; // Limpia el input tras fallar
-            }
+            setTimeout(() => {
+                // Enviamos el código escrito directamente al servidor.
+                // Si es incorrecto, el backend de Google bloqueará el acceso.
+                window.location.href = urlAdmin + "?codigo=" + encodeURIComponent(codigoIngresado); 
+            }, 800);
         };
 
         // Escuchar clic en el botón verificar
